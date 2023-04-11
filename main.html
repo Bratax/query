@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Array Table CRUD Operations</title>
+    <style>
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+      th, td {
+        text-align: left;
+        padding: 8px;
+      }
+      th {
+        background-color: #4CAF50;
+        color: white;
+      }
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+      tr.selected {
+        background-color: #b3d4fc;
+      }
+      #search{
+        margin-right: 10px;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        width: 200px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Array Table CRUD Operations</h1>
+
+    <form >
+
+      <label for="id">ID:</label>
+      <input type="number" id="id" name="id" required>
+      <br><br>
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required>
+      <br><br>
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+      <label for="search">Search</label>
+      <input type="text" id="search" name="search">
+      <button type="button" id="searchbtn">Search</button>
+      <br><br>
+      <button type="button" id="add-btn">Add</button>
+      <button type="button" id="edit-btn">Edit</button>
+      <button type="button" id="delete-btn">Delete</button>
+      <button type="reset">Reset</button>
+    </form>
+
+    <br>
+
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody id="data">
+      </tbody>
+    </table>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="qwerty.js"></script>
+    <script>
+       // Add event listener for table row selection
+       $(document).on("click", "#data tr", function() {
+        $("#data tr").removeClass("selected");
+        $(this).addClass("selected");
+        var id = $(this).find("td:eq(0)").text();
+        var name = $(this).find("td:eq(1)").text();
+        var email = $(this).find("td:eq(2)").text();
+        $("#id").val(id);
+        $("#name").val(name);
+        $("#email").val(email);
+        $("#add-btn").prop("disabled", true);
+        $("#edit-btn").prop("disabled", false);
+        $("#delete-btn").prop("disabled", false);
+      });
+      
+      // Add event listener for reset button
+      $(document).on("click", "button[type='reset']", function() {
+        $("#data tr").removeClass("selected");
+        $("#id").val("");
+        $("#name").val("");
+        $("#email").val("");
+        $("#add-btn").prop("disabled", false);
+        $("#edit-btn").prop("disabled", true);
+        $("#delete-btn").prop("disabled", true);
+      });
+
+      //Add event listener for search button in javascript file
+      $(document).on("click", "#searchbtn", function() {
+        search();
+      });
+    </script>
+  </body>
+</html>
