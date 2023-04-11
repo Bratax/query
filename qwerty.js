@@ -156,3 +156,16 @@ function search() {
   });
 }
 
+/*
+//Function to sort the table by ID
+function sortData() {
+  data.sort(function(a, b) {
+    return a.id - b.id;
+  });
+
+  $("#data").empty();
+  data.forEach(function(item) {
+    addRow(item);
+  });
+}
+*/
